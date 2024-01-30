@@ -11,8 +11,6 @@
 //#define FHD
 //#define FULLSCREEN
 
-#define MAX_KEY_COUNT 8
-
 #ifdef _WIN32
 #  include "SDL.h"
 #  include "SDL_image.h"

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Assets.c" />
     <ClCompile Include="Input.c" />
     <ClCompile Include="LevelCanvas.c" />
     <ClCompile Include="LevelScene.c" />
@@ -27,6 +28,7 @@
     <ClCompile Include="Time.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assets.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LevelCanvas.h" />
     <ClInclude Include="LevelScene.h" />

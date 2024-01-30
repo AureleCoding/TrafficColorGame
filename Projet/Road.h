@@ -18,8 +18,8 @@ typedef struct CarPos
 {
 	float x;
 	float y;
-	float w;
-	float h;
+	int w;
+	int h;
 } CarPos;
 
 typedef struct Car {
@@ -29,7 +29,7 @@ typedef struct Car {
 	
 	int carSpeed;
 	
-	int carColor;
+	SDL_Color carColor;
 
 	CarPos carPos;
 } Car;
@@ -43,6 +43,8 @@ typedef struct Road
 	int carCount;
 
 	Input* input;
+
+	int chooseCar;
 } Road;
 
 Road *Road_New(LevelScene *scene);

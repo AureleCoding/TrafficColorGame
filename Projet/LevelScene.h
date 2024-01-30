@@ -4,6 +4,8 @@
 #include "LevelCanvas.h"
 #include "Road.h"
 #include "Input.h"
+#include "Time.h"
+#include "Assets.h"
 
 typedef struct Cube {
     float x;
@@ -23,6 +25,10 @@ typedef struct LevelScene
     Input* input;
 
     Cube cubes;
+
+    Time* time;
+
+    Assets* assets;
 } LevelScene;
 
 LevelScene *LevelScene_New(SDL_Renderer* renderer);
@@ -43,4 +49,14 @@ INLINE SDL_Renderer* LevelScene_getRenderer(LevelScene* self)
 INLINE Input* LevelScene_getInput(LevelScene* self)
 {
     return self->input;
+}
+
+INLINE Time* getTime(LevelScene* self)
+{
+	return self->time;
+}
+
+INLINE Assets* getAssets(LevelScene* self)
+{
+	return self->assets;
 }

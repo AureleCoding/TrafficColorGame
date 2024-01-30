@@ -1,6 +1,7 @@
-#include "settings.h"
-#include "levelScene.h"
-#include "levelCanvas.h"
+#include "Settings.h"
+#include "LevelScene.h"
+#include "LevelCanvas.h"
+#include "Time.h"
 
 void ErrorExit(const char* message);
 
@@ -37,21 +38,21 @@ int main(int argc, char** argv) {
 	//Affiche le rendu a l'ecran
 	SDL_RenderPresent(renderer);
 
-	SDL_Event event;
-
 	bool running = true;
 
-	LevelScene* levelScene = NULL;
+	LevelScene* levelScene = LevelScene_New(renderer);
+	Time *time = Time_New();
+
+	levelScene->time = time;
 
 	while (running) {
-		levelScene = LevelScene_New(renderer);
-
 		LevelScene_Init(levelScene);
 
 		while (true)
 		{
-			bool quitLoop = LevelScene_Update(levelScene);
+			Time_Update(time);
 
+			bool quitLoop = LevelScene_Update(levelScene);
 			if (quitLoop)
 				break;
 
@@ -73,6 +74,7 @@ int main(int argc, char** argv) {
 	//SDL_DestroyTexture(texture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+	Time_Destroy(time);
 	SDL_Quit();
 
 	return EXIT_SUCCESS;

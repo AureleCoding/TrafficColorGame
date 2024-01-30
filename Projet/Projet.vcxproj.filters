@@ -7,6 +7,7 @@
     <ClCompile Include="Road.c" />
     <ClCompile Include="Input.c" />
     <ClCompile Include="Time.c" />
+    <ClCompile Include="Assets.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h" />
@@ -15,5 +16,6 @@
     <ClInclude Include="Road.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Assets.h" />
   </ItemGroup>
 </Project>

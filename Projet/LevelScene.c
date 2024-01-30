@@ -10,9 +10,8 @@ LevelScene* LevelScene_New(SDL_Renderer *renderer) {
 
 	self->renderer = renderer;
 	self->canvas = LevelCanvas_New(self);
-
+	self->assets = Assets_New(renderer);
 	self->input = Input_New();
-
 	self->road = Road_New(self);
 
 	return self;
