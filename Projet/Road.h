@@ -11,7 +11,9 @@ typedef enum CarState
 
 	CAR_STOPPED,
 
-	CAR_CRASHED
+	CAR_CRASHED,
+
+	CAR_FINISHED
 } CarState;
 
 typedef struct CarPos
@@ -44,7 +46,9 @@ typedef struct Road
 
 	Input* input;
 
-	int chooseCar;
+	int firstCar;
+
+	bool firstCarMoving;
 } Road;
 
 Road *Road_New(LevelScene *scene);

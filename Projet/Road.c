@@ -10,12 +10,14 @@ Road* Road_New(LevelScene* scene) {
     self->scene = scene;
     int carCount = 10;
 
-    self->chooseCar = 0;
-
     self->carCount = carCount;
 
     self->cars = (Car*)calloc(carCount, sizeof(Car));
     AssertNew(self->cars);
+
+    self->firstCar = 0;
+
+    self->firstCarMoving = false;
 
     return self;
 }
@@ -44,35 +46,42 @@ void Road_Init(Road* self) {
 void Road_Update(Road* self) {
     LevelScene* scene = self->scene;
     Time* time = getTime(scene);
-    Input *input = LevelScene_getInput(scene);
+    Input* input = LevelScene_getInput(scene);
 
-    if (self->cars[0].carPos.x < WINDOW_WIDTH/5)
-    {
+    if (input->rightPressed) {
+        self->firstCarMoving = true;
+    }
+
+    if (self->firstCar < self->carCount && self->cars[self->firstCar].carPos.x > WINDOW_WIDTH) {
+        self->firstCarMoving = false;
+        self->firstCar++;
+    }
+
+    if (self->cars[0].carPos.x < WINDOW_WIDTH / 5) {
         for (int i = 0; i < self->carCount; ++i) {
             self->cars[i].carSpeed = 200;
+            self->cars[i].state = CAR_MOVING;
         }
-
-        printf("Avance\n");
+        printf("All cars advancing.\n");
+    }
+    else if (self->firstCarMoving && self->firstCar < self->carCount) {
+        self->cars[self->firstCar].carSpeed = 200;
+        self->cars[self->firstCar].state = CAR_MOVING;
+        printf("First car advancing.\n");
     }
     else {
-        
         for (int i = 0; i < self->carCount; ++i) {
             self->cars[i].carSpeed = 0;
-        }        
-        
-        printf("Stop\n");
-    }
-
-    if (input->rightPressed)
-    {
-        self->cars[self->chooseCar].carSpeed = 200;
+            self->cars[i].state = CAR_STOPPED;
+        }
+        printf("All cars stopped.\n");
     }
 
     for (int i = 0; i < self->carCount; ++i) {
         self->cars[i].carPos.x += self->cars[i].carSpeed * Time_getDeltaTime(time);
     }
-
 }
+
 
 void Road_Render(Road* self) {
     LevelScene* scene = self->scene;
